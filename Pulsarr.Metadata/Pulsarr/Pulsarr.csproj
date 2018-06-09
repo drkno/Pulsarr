@@ -16,7 +16,7 @@
     <PackageReference Include="Microsoft.Data.Sqlite" Version="2.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />
     <PackageReference Include="SabSharp" Version="1.0.0-prelease1" />
-    <PackageReference Include="Transmission.NetCore.Client" Version="1.0.0" />
+    <PackageReference Include="Transmission.API.RPC" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
