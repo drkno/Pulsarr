@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>b049b07c-dd89-4b66-b1d4-75f8cce280e8</UserSecretsId>
   </PropertyGroup>
 
@@ -12,8 +12,11 @@
 
   <ItemGroup>
     <PackageReference Include="Goodreads" Version="1.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="2.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />
+    <PackageReference Include="SabSharp" Version="1.0.0-prelease1" />
+    <PackageReference Include="Transmission.NetCore.Client" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
