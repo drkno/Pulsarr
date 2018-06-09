@@ -1,0 +1,23 @@
+{
+  "name": "pulsarr-web",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/react-fontawesome": "^0.0.20",
+    "bootstrap": "^4.1.1",
+    "lodash.debounce": "^4.0.8",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-open-iconic-svg": "^2.0.0",
+    "react-scripts": "1.1.4",
+    "reactstrap": "^6.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

@@ -1,0 +1,50 @@
+.sidebar-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: lightgray;
+}
+
+.sidebar-menu > li {
+    text-align: left;
+}
+
+.sidebar-menu > li:hover {
+    background-color: rgba(169, 169, 169, 0.5);
+}
+
+.sidebar-menu > li > a {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: pointer;
+    padding: 1em 3em;
+    text-align: left;
+    user-select: none;
+    text-decoration: none;
+}
+
+.sidebar-menu > li > a > span {
+    opacity: 1;
+    filter: opacity(100%);
+}
+
+.sidebar-collapsed > a {
+    max-width: 7em;
+}
+
+.sidebar-collapsed > a > span {
+    filter: opacity(0%) !important;
+    opacity: 0 !important;
+}
+
+.sidebar-menu > li > a,
+.sidebar-menu > li > a:link,
+.sidebar-menu > li > a:hover,
+.sidebar-menu > li > a:visited,
+.sidebar-menu > li > a:active {
+    color: inherit;
+    white-space: nowrap;
+    transition: all 5s ease-in-out;
+    -moz-transition: opacity .15s ease-in-out;
+}

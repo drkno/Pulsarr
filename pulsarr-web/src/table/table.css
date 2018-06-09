@@ -1,0 +1,12 @@
+.div-table {
+    display: table;
+    width: 100%;
+}
+
+.div-table-row {
+    display: table-row;
+}
+
+.div-table-cell {
+    display: table-cell;
+}
