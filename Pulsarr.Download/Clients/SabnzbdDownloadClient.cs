@@ -11,6 +11,8 @@ namespace Pulsarr.Download.Clients
 {
     public class SabnzbdDownloadClient : IDownloadClient
     {
+        private readonly IPreferenceService _preferencesService;
+        public bool Enabled => _preferencesService.Get("sabnzbd.enabled", false);
         public DownloadType[] DownloadTypes { get; } = { DownloadType.Usenet };
         private readonly SabClient _client;
 
@@ -18,6 +20,7 @@ namespace Pulsarr.Download.Clients
 
         public SabnzbdDownloadClient(IPreferenceService preferencesService)
         {
+            _preferencesService = preferencesService;
             _category = preferencesService.Get("sabnzbd.category", "audiobooks");
             _client = new SabClient(
                 preferencesService.Get("sabnzbd.host", "127.0.0.1"),

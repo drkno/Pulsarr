@@ -22,7 +22,7 @@ namespace Pulsarr.Metadata.Sources
         {
             var dataSources = _provider.GetServices<IDataSource>();
             var resultList = new List<Book>();
-            foreach (var dataSource in dataSources)
+            foreach (var dataSource in dataSources.Where(d => d.Enabled))
             {
                 var results = await dataSource.Search(title);
                 resultList.AddRange(results);
@@ -32,7 +32,7 @@ namespace Pulsarr.Metadata.Sources
 
         public Task<Book> Lookup(string dataSourceId, string bookId)
         {
-            var dataSource = _provider.GetServices<IDataSource>().First(p => p.SourceId == dataSourceId);
+            var dataSource = _provider.GetServices<IDataSource>().First(p => p.Enabled && p.SourceId == dataSourceId);
             return dataSource.Lookup(bookId);
         }
     }

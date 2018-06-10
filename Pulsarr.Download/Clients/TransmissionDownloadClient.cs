@@ -21,6 +21,8 @@ namespace Pulsarr.Download.Clients
             TR_STATUS_STOPPED      = (1<<4)  /* Torrent is stopped */
         }
 
+        private readonly IPreferenceService _preferencesService;
+        public bool Enabled => _preferencesService.Get("transmission.enabled", false);
         public DownloadType[] DownloadTypes { get; } = { DownloadType.Torrent };
         private const double BytesInGb = 1024 * 1024 * 1024;
 
@@ -28,6 +30,7 @@ namespace Pulsarr.Download.Clients
 
         public TransmissionDownloadClient(IPreferenceService preferencesService)
         {
+            _preferencesService = preferencesService;
             _client = new Client(
                 preferencesService.Get("transmission.host", "127.0.0.1"), null,
                 preferencesService.Get("transmission.username", "transmission"),

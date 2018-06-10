@@ -41,7 +41,7 @@ namespace Pulsarr.Download.Manager
             var progress = new List<DownloadEventArgs>();
             
             var downloadClients = _provider.GetServices<IDownloadClient>();
-            foreach (var downloadClient in downloadClients)
+            foreach (var downloadClient in downloadClients.Where(d => d.Enabled))
             {
                 var changes = downloadClient.Poll();
                 foreach (var change in changes)

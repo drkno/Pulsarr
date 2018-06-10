@@ -6,6 +6,7 @@ namespace Pulsarr.Metadata.ServiceInterfaces
 {
     public interface IDataSource
     {
+        bool Enabled { get; }
         string SourceId { get; }
         Task<ImmutableList<Book>> Search(string title);
         Task<Book> Lookup(string id);

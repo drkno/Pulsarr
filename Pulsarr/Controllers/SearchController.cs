@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Pulsarr.Metadata.Model;
 using Pulsarr.Metadata.ServiceInterfaces;
-using Pulsarr.Metadata.Sources;
 
 namespace Pulsarr.Controllers
 {
@@ -18,8 +17,14 @@ namespace Pulsarr.Controllers
             _dataSource = dataSource;
         }
 
+        [HttpGet]
+        public string GetHelp()
+        {
+            return "This endpoint only supports a POST based search query or a GET at ./{sourceId}/{bookId}";
+        }
+
         [HttpPost("{title}")]
-        public async Task<ImmutableList<Book>> SearchForBook(string title)
+        public async Task<ImmutableList<Book>> SearchForBook([FromBody] string title)
         {
             return await _dataSource.Search(title);
         }

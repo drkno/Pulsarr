@@ -6,6 +6,7 @@ namespace Pulsarr.Download.ServiceInterfaces
 {
     public interface IDownloadClient
     {
+        bool Enabled { get; }
         DownloadType[] DownloadTypes { get; }
         IEnumerable<DownloadStateChanged> Poll();
         void Download(DownloadHandle download);

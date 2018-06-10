@@ -11,12 +11,14 @@ namespace Pulsarr.Metadata.Sources.GoodReads
 {
     public class GoodReadsDataSource : IDataSource
     {
+        private readonly IPreferenceService _preferenceService;
         public string SourceId { get; } = "GoodReads";
-
+        public bool Enabled => _preferenceService.Get("goodreads.enabled", true);
         private readonly IGoodreadsClient _client;
 
         public GoodReadsDataSource(IPreferenceService preferenceService)
         {
+            _preferenceService = preferenceService;
             _client = GoodreadsClient.Create(
                 preferenceService.Get("goodreads.apikey", "ckvsiSDsuqh7omh74ZZ6Q"), // todo: this is the lazylibrarian key...
                 preferenceService.Get("goodreads.apisecret", "")
