@@ -5,8 +5,11 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pulsarr.Download;
+using Pulsarr.Library;
 using Pulsarr.Metadata;
+using Pulsarr.PostDownload;
 using Pulsarr.Preferences;
+using Pulsarr.Search;
 
 // ReSharper disable UnusedMember.Global
 namespace Pulsarr
@@ -37,6 +40,9 @@ namespace Pulsarr
             mvc.AddApplicationPart(PreferencesServiceRegistry.ConfigureServices(services));
             mvc.AddApplicationPart(DownloadServiceRegistry.ConfigureServices(services));
             mvc.AddApplicationPart(MetadataServiceRegistry.ConfigureServices(services));
+            mvc.AddApplicationPart(LibraryServiceRegistry.ConfigureServices(services));
+            mvc.AddApplicationPart(PostDownloadServiceRegistry.ConfigureServices(services));
+            mvc.AddApplicationPart(SearchServiceRegistry.ConfigureServices(services));
 
             mvc.AddControllersAsServices();
         }
