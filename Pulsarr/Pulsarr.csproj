@@ -35,8 +35,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Pulsarr.Download\Pulsarr.Download.csproj" />
+    <ProjectReference Include="..\Pulsarr.Library\Pulsarr.Library.csproj" />
     <ProjectReference Include="..\Pulsarr.Metadata\Pulsarr.Metadata.csproj" />
+    <ProjectReference Include="..\Pulsarr.PostDownload\Pulsarr.PostDownload.csproj" />
     <ProjectReference Include="..\Pulsarr.Preferences\Pulsarr.Preferences.csproj" />
+    <ProjectReference Include="..\Pulsarr.Search\Pulsarr.Search.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
