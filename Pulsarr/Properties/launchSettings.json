@@ -1,17 +1,16 @@
-{
+﻿{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:54572/",
-      "sslPort": 0
+      "applicationUrl": "http://localhost:21520",
+      "sslPort": 44356
     }
   },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/search",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -19,11 +18,10 @@
     "Pulsarr": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/search",
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://localhost:54573/"
+      }
     }
   }
 }
