@@ -1,3 +1,59 @@
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# User-specific stuff
+Pulsarr/ClientApp/.idea/**/workspace.xml
+Pulsarr/ClientApp/.idea/**/tasks.xml
+Pulsarr/ClientApp/.idea/**/dictionaries
+Pulsarr/ClientApp/.idea/**/shelf
+
+# Sensitive or high-churn files
+Pulsarr/ClientApp/.idea/**/dataSources/
+Pulsarr/ClientApp/.idea/**/dataSources.ids
+Pulsarr/ClientApp/.idea/**/dataSources.local.xml
+Pulsarr/ClientApp/.idea/**/sqlDataSources.xml
+Pulsarr/ClientApp/.idea/**/dynamic.xml
+Pulsarr/ClientApp/.idea/**/uiDesigner.xml
+Pulsarr/ClientApp/.idea/**/dbnavigator.xml
+
+# Gradle
+Pulsarr/ClientApp/.idea/**/gradle.xml
+Pulsarr/ClientApp/.idea/**/libraries
+
+# CMake
+Pulsarr/ClientApp/cmake-build-debug/
+Pulsarr/ClientApp/cmake-build-release/
+
+# Mongo Explorer plugin
+Pulsarr/ClientApp/.idea/**/mongoSettings.xml
+
+# File-based project format
+*.iws
+
+# IntelliJ
+Pulsarr/ClientApp/out/
+
+# mpeltonen/sbt-idea plugin
+Pulsarr/ClientApp/.idea_modules/
+
+# JIRA plugin
+Pulsarr/ClientApp/atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+Pulsarr/ClientApp/.idea/replstate.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+Pulsarr/ClientApp/com_crashlytics_export_strings.xml
+Pulsarr/ClientApp/crashlytics.properties
+Pulsarr/ClientApp/crashlytics-build.properties
+Pulsarr/ClientApp/fabric.properties
+
+# Editor-based Rest Client
+Pulsarr/ClientApp/.idea/httpRequests
+
 # Logs
 Pulsarr.Web/logs
 *.log
