@@ -1,45 +1,33 @@
-﻿using System.Collections.Generic;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NzbDrone.Core.MetadataSource.SkyHook.Resource;
-using Pulsarr.Model.Metadata;
+using Pulsarr.Metadata.Model;
+using Pulsarr.Metadata.ServiceInterfaces;
+using Pulsarr.Metadata.Sources;
 
 namespace Pulsarr.Controllers
 {
     [Route("api/[controller]")]
-    public class SearchController : Controller
-    {      
+    [ApiController]
+    public class SearchController : ControllerBase
+    {
+        private readonly IMetaDataSource _dataSource;
+
+        public SearchController(IMetaDataSource dataSource)
+        {
+            _dataSource = dataSource;
+        }
+
         [HttpPost("{title}")]
-        public async Task<ImmutableList<IBook>> SearchForBook(string title)
+        public async Task<ImmutableList<Book>> SearchForBook(string title)
         {
-            return await DataSourceCollector.Instance.Search(title);
+            return await _dataSource.Search(title);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IBook> LookupBook(ulong id)
+        [HttpGet("{sourceId}/{bookId}")]
+        public async Task<Book> LookupBook(string sourceId, string bookId)
         {
-            return await DataSourceCollector.Instance.Lookup(id);
-        }
-
-        // http://localhost:54572/api/v1/search?type=artist&query=test
-        [HttpGet]
-        public async Task<List<AlbumResource>> Search(
-            [FromQuery(Name = "type")] string type,
-            [FromQuery(Name = "query")] string query)
-        {
-            var data = await DataSourceCollector.Instance.Search(query);
-            var resources = new List<AlbumResource>();
-            foreach (var d in data)
-            {
-                var ar = new AlbumResource();
-                ar.Title = d.Title;
-                ar.Artist = new AlbumArtistResource() {Id = "", Name = d.Author};
-                ar.Id = d.SourceId + "-" + d.SourceBookId;
-                ar.Images = new List<ImageResource>() {new ImageResource() {CoverType = "Poster", Url = d.ImageUrl}};
-                resources.Add(ar);
-            }
-            return resources;
+            return await _dataSource.Lookup(sourceId, bookId);
         }
     }
 }

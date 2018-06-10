@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pulsarr.Download;
+using Pulsarr.Metadata;
+using Pulsarr.Preferences;
 
 namespace Pulsarr
 {
@@ -27,6 +29,10 @@ namespace Pulsarr
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            PreferencesServiceRegistry.ConfigureServices(services);
+            DownloadServiceRegistry.ConfigureServices(services);
+            MetadataServiceRegistry.ConfigureServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
