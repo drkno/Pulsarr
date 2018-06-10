@@ -1,8 +1,8 @@
 ﻿using Pulsarr.Download.Model;
 
-namespace Pulsarr.Model
+namespace Pulsarr.Download.API
 {
-    public class DownloadPost
+    public class DownloadPostData
     {
         public DownloadType Type { get; set; }
         public string Uri { get; set; }

@@ -4,15 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 using Pulsarr.Metadata.Model;
 using Pulsarr.Metadata.ServiceInterfaces;
 
-namespace Pulsarr.Controllers
+namespace Pulsarr.Metadata.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SearchController : ControllerBase
+    public class FindController : ControllerBase
     {
         private readonly IMetaDataSource _dataSource;
 
-        public SearchController(IMetaDataSource dataSource)
+        public FindController(IMetaDataSource dataSource)
         {
             _dataSource = dataSource;
         }
@@ -23,10 +23,10 @@ namespace Pulsarr.Controllers
             return "This endpoint only supports a POST based search query or a GET at ./{sourceId}/{bookId}";
         }
 
-        [HttpPost("{title}")]
-        public async Task<ImmutableList<Book>> SearchForBook([FromBody] string title)
+        [HttpPost]
+        public async Task<ImmutableList<Book>> SearchForBook([FromBody] FindPostData postDataData)
         {
-            return await _dataSource.Search(title);
+            return await _dataSource.Search(postDataData.Title);
         }
 
         [HttpGet("{sourceId}/{bookId}")]

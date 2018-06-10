@@ -7,54 +7,54 @@
 !.vscode/extensions.json
 
 # User-specific stuff
-Pulsarr/ClientApp/.idea/**/workspace.xml
-Pulsarr/ClientApp/.idea/**/tasks.xml
-Pulsarr/ClientApp/.idea/**/dictionaries
-Pulsarr/ClientApp/.idea/**/shelf
+Pulsarr/WebUI/.idea/**/workspace.xml
+Pulsarr/WebUI/.idea/**/tasks.xml
+Pulsarr/WebUI/.idea/**/dictionaries
+Pulsarr/WebUI/.idea/**/shelf
 
 # Sensitive or high-churn files
-Pulsarr/ClientApp/.idea/**/dataSources/
-Pulsarr/ClientApp/.idea/**/dataSources.ids
-Pulsarr/ClientApp/.idea/**/dataSources.local.xml
-Pulsarr/ClientApp/.idea/**/sqlDataSources.xml
-Pulsarr/ClientApp/.idea/**/dynamic.xml
-Pulsarr/ClientApp/.idea/**/uiDesigner.xml
-Pulsarr/ClientApp/.idea/**/dbnavigator.xml
+Pulsarr/WebUI/.idea/**/dataSources/
+Pulsarr/WebUI/.idea/**/dataSources.ids
+Pulsarr/WebUI/.idea/**/dataSources.local.xml
+Pulsarr/WebUI/.idea/**/sqlDataSources.xml
+Pulsarr/WebUI/.idea/**/dynamic.xml
+Pulsarr/WebUI/.idea/**/uiDesigner.xml
+Pulsarr/WebUI/.idea/**/dbnavigator.xml
 
 # Gradle
-Pulsarr/ClientApp/.idea/**/gradle.xml
-Pulsarr/ClientApp/.idea/**/libraries
+Pulsarr/WebUI/.idea/**/gradle.xml
+Pulsarr/WebUI/.idea/**/libraries
 
 # CMake
-Pulsarr/ClientApp/cmake-build-debug/
-Pulsarr/ClientApp/cmake-build-release/
+Pulsarr/WebUI/cmake-build-debug/
+Pulsarr/WebUI/cmake-build-release/
 
 # Mongo Explorer plugin
-Pulsarr/ClientApp/.idea/**/mongoSettings.xml
+Pulsarr/WebUI/.idea/**/mongoSettings.xml
 
 # File-based project format
 *.iws
 
 # IntelliJ
-Pulsarr/ClientApp/out/
+Pulsarr/WebUI/out/
 
 # mpeltonen/sbt-idea plugin
-Pulsarr/ClientApp/.idea_modules/
+Pulsarr/WebUI/.idea_modules/
 
 # JIRA plugin
-Pulsarr/ClientApp/atlassian-ide-plugin.xml
+Pulsarr/WebUI/atlassian-ide-plugin.xml
 
 # Cursive Clojure plugin
-Pulsarr/ClientApp/.idea/replstate.xml
+Pulsarr/WebUI/.idea/replstate.xml
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
-Pulsarr/ClientApp/com_crashlytics_export_strings.xml
-Pulsarr/ClientApp/crashlytics.properties
-Pulsarr/ClientApp/crashlytics-build.properties
-Pulsarr/ClientApp/fabric.properties
+Pulsarr/WebUI/com_crashlytics_export_strings.xml
+Pulsarr/WebUI/crashlytics.properties
+Pulsarr/WebUI/crashlytics-build.properties
+Pulsarr/WebUI/fabric.properties
 
 # Editor-based Rest Client
-Pulsarr/ClientApp/.idea/httpRequests
+Pulsarr/WebUI/.idea/httpRequests
 
 # Logs
 Pulsarr.Web/logs

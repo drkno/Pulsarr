@@ -3,9 +3,8 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Pulsarr.Download.Model;
 using Pulsarr.Download.ServiceInterfaces;
-using Pulsarr.Model;
 
-namespace Pulsarr.Controllers
+namespace Pulsarr.Download.API
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -31,9 +30,9 @@ namespace Pulsarr.Controllers
         }
 
         [HttpPost]
-        public DownloadHandle Post([FromBody] DownloadPost postData)
+        public DownloadHandle Post([FromBody] DownloadPostData postDataData)
         {
-            return _manager.DownloadItem(postData.Type, postData.Uri);
+            return _manager.DownloadItem(postDataData.Type, postDataData.Uri);
         }
 
         [HttpDelete("{id}")]

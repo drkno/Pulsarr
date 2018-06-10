@@ -8,6 +8,7 @@ using Pulsarr.Download;
 using Pulsarr.Metadata;
 using Pulsarr.Preferences;
 
+// ReSharper disable UnusedMember.Global
 namespace Pulsarr
 {
     public class Startup
@@ -17,22 +18,27 @@ namespace Pulsarr
             Configuration = configuration;
         }
 
+        // ReSharper disable once MemberCanBePrivate.Global
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            var mvc = services.AddMvc();
+            mvc.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
             });
+            
+            mvc.AddApplicationPart(PreferencesServiceRegistry.ConfigureServices(services));
+            mvc.AddApplicationPart(DownloadServiceRegistry.ConfigureServices(services));
+            mvc.AddApplicationPart(MetadataServiceRegistry.ConfigureServices(services));
 
-            PreferencesServiceRegistry.ConfigureServices(services);
-            DownloadServiceRegistry.ConfigureServices(services);
-            MetadataServiceRegistry.ConfigureServices(services);
+            mvc.AddControllersAsServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,18 +60,15 @@ namespace Pulsarr
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                routes.MapRoute("default", "{controller}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "ClientApp";
-
+                spa.Options.SourcePath = "WebUI";
                 if (env.IsDevelopment())
                 {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
+                    spa.UseReactDevelopmentServer("start");
                 }
             });
         }
