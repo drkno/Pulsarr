@@ -1,0 +1,19 @@
+.marvin-user:before {
+    color: red;
+    content: 'matthew';
+}
+
+.marvin-at:before {
+    color: yellow;
+    content: '@';
+}
+
+.marvin-hostname:before {
+    color: cyan;
+    content: 'DeepThought';
+}
+
+.marvin-directory:before {
+    color: yellow;
+    content: ' ~ # ';
+}

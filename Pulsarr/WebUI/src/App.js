@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { faPlusSquare, faBook, faHistory, faCog } from '@fortawesome/fontawesome-free-solid';
 import SidebarContainer from './components/sidebar';
+import Error from './components/error';
 import routes from './routes';
 import Logo from './icon.png';
 import './App.css';
@@ -37,6 +38,7 @@ class App extends Component {
                     <Switch>
                         {routes}
                         <Route exact path="/" render={() => (<Redirect to="/library"/>)}/>
+                        <Route component={Error} />
                     </Switch>
                 </SidebarContainer>
             </Router>
