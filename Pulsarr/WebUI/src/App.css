@@ -1,0 +1,11 @@
+html, 
+body {
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.sidebar-logo {
+    height: 4em;
+    margin: 1.75em;
+}

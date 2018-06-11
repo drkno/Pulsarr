@@ -4,7 +4,7 @@ import {Table, Td, Tr} from '../table';
 import './sidebar.css';
 
 export default ({items, children, logo}) => (
-    <Table>
+    <Table className='sidebar-table'>
         <Tr>
             <Td className='sidebar-sidebar'>
                 {logo}

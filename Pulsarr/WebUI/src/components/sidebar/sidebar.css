@@ -1,8 +1,13 @@
 .sidebar-content {
     width: 100%;
     padding: 1em;
+    overflow: scroll;
 }
 
 .sidebar-sidebar {
     background-color: lightgray;
+}
+
+.sidebar-table {
+    height: 100%;
 }

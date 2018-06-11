@@ -27,10 +27,21 @@ namespace Pulsarr.Preferences.API
             return _preferenceService.Get(key, "");
         }
 
-        [HttpPost("{key}")]
-        public void SetValue(string key, [FromBody] string value)
+        [HttpPost]
+        public void SetValue([FromBody] Dictionary<string, string> value)
         {
-            _preferenceService.Set(key, value);
+            foreach (var key in value.Keys) {
+                _preferenceService.Set(key, value[key]);
+            }
+        }
+
+        [HttpDelete]
+        public void DeletePreference([FromBody] string[] preferences)
+        {
+            foreach (var preference in preferences)
+            {
+                _preferenceService.Set<string>(preference, null);
+            }
         }
     }
 }

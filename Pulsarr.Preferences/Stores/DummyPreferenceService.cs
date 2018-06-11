@@ -92,7 +92,15 @@ namespace Pulsarr.Preferences.Stores
             {
                 lock (_preferences)
                 {
-                    _preferences[key] = value;
+                    if (value == null)
+                    {
+                        _preferences.Remove(key);
+                        _comments.Remove(key);
+                    }
+                    else
+                    {
+                        _preferences[key] = value;
+                    }
                     SavePreferencesToFile();
                 }
             }

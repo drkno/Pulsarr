@@ -60,7 +60,7 @@ class SearchBar extends React.Component {
                 <InputGroup>
                     <Input
                         list={this.listId}
-                        autocomplete='off'
+                        autoComplete='off'
                         innerRef={ref => this.ref = ref}
                         placeholder="Search"
                         onChange={e => this.onChangeDebounce(e.target.value)}

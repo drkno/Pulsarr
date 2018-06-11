@@ -27,7 +27,7 @@ namespace Pulsarr.Preferences.Stores
 
         public void Set<T>(string key, T value)
         {
-            this[key] = value.ToString();
+            this[key] = value?.ToString();
         }
     }
 }

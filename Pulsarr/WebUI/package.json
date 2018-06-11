@@ -11,8 +11,12 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-open-iconic-svg": "^2.0.0",
-    "react-scripts": "1.1.4",
-    "reactstrap": "^6.0.1"
+    "react-router-dom": "^4.3.1",
+    "reactstrap": "^6.0.1",
+    "whatwg-fetch": "^2.0.4"
+  },
+  "devDependencies": {
+    "react-scripts": "^1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
