@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pulsarr.Search.ServiceInterfaces
+namespace Pulsarr.Search.Manager.Model
 {
-    interface ISearchProvider
+    public class SearchResult
     {
     }
 }

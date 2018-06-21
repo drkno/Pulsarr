@@ -30,6 +30,7 @@ namespace Pulsarr
         {
             var mvc = services.AddMvc();
             mvc.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSignalR();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -77,6 +78,11 @@ namespace Pulsarr
                     spa.UseReactDevelopmentServer("start");
                 }
             });
+
+//            app.UseSignalR(routes =>
+//            {
+//                routes.
+//            })
         }
     }
 }

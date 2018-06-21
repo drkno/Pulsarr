@@ -10,7 +10,7 @@ namespace Pulsarr.Download
     {
         public static Assembly ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IDownloadClient, SabnzbdDownloadClient>();
+            services.AddSingleton<IDownloadClient, TransmissionDownloadClient>();
             services.AddSingleton<IDownloadClient, SabnzbdDownloadClient>();
             services.AddSingleton<IDownloadManager, DownloadManager>();
             return Assembly.GetExecutingAssembly();

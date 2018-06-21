@@ -1,10 +1,23 @@
 import React from 'react';
 import { Table, Button, Form, Input, Badge, Progress } from 'reactstrap';
+//import WebSocketComponent from '../../websocket';
 
 class DownloadActivity extends React.Component {
     state = {
         downloads: []
     };
+
+    async componentDidMount() {
+        const response = await fetch('/api/download');
+        this.setState({
+            downloads: await response.json()
+        });
+        this.on('activity.download', this.onDownloadsChanged);
+    }
+
+    onDownloadsChanged(...data) {
+        console.log(data);
+    }
 
     deleteDownload(id) {
 

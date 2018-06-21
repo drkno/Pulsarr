@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@aspnet/signalr@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@aspnet/signalr/-/signalr-1.0.0.tgz#26b10a32014a65c540cc5053cffa883c320788ce"
+
 "@fortawesome/fontawesome-common-types@^0.1.7":
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.1.7.tgz#4336c4b06d0b5608ff1215464b66fcf9f4795284"
