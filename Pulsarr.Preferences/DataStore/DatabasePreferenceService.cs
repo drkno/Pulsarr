@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Pulsarr.Preferences.DataModel.Preferences;
+using Pulsarr.Preferences.Exceptions;
 using Pulsarr.Preferences.ServiceInterfaces;
 
 namespace Pulsarr.Preferences.DataStore
@@ -19,7 +20,15 @@ namespace Pulsarr.Preferences.DataStore
 
         protected override string this[string key]
         {
-            get => _manager.PerformDbTask(db => db.Preferences.Find(key).Value);
+            get
+            {
+                var kvp = _manager.PerformDbTask(db => db.Preferences.Find(key));
+                if (kvp == null)
+                {
+                    throw new NoSuchPreferenceException();
+                }
+                return kvp.Value;
+            }
             set
             {
                 _manager.PerformDbTask(db =>

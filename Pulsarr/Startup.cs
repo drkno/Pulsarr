@@ -10,6 +10,7 @@ using Pulsarr.Metadata;
 using Pulsarr.PostDownload;
 using Pulsarr.Preferences;
 using Pulsarr.Search;
+using Swashbuckle.AspNetCore.Swagger;
 
 // ReSharper disable UnusedMember.Global
 namespace Pulsarr
@@ -46,6 +47,11 @@ namespace Pulsarr
             mvc.AddApplicationPart(SearchServiceRegistry.ConfigureServices(services));
 
             mvc.AddControllersAsServices();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Pulsarr API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +66,13 @@ namespace Pulsarr
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            app.UseSwagger(c => c.RouteTemplate = "/api/swagger-{documentName}.json");
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/api/swagger-v1.json", "Pulsarr API");
+                c.RoutePrefix = "api";
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
