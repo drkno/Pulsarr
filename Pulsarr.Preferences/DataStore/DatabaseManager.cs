@@ -13,7 +13,7 @@ namespace Pulsarr.Preferences.DataStore
         public DatabaseManager(IServiceProvider provider)
         {
             var migrations = new List<IDatabaseMigration>(provider.GetServices<IDatabaseMigration>());
-            migrations.Sort((m1, m2) => m2.Priority - m1.Priority);
+            migrations.Sort((m1, m2) => m1.Priority - m2.Priority);
             using (var db = new DatabaseStore())
             {
                 db.Database.Migrate();

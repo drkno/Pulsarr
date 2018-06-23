@@ -47,7 +47,7 @@ namespace Pulsarr.Preferences.Migrations
                 }
                 else
                 {
-                    context.Add(new KeyValuePair(key, val));
+                    context.Add(new PreferenceKeyValuePair(key, val));
                 }
                 context.SaveChanges();
             }

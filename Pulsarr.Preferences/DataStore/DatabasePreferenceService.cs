@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Pulsarr.Preferences.DataModel.Preferences;
 using Pulsarr.Preferences.ServiceInterfaces;
 
 namespace Pulsarr.Preferences.DataStore
@@ -23,7 +24,15 @@ namespace Pulsarr.Preferences.DataStore
             {
                 _manager.PerformDbTask(db =>
                 {
-                    db.Preferences.Find(key).Value = value;
+                    var kvp = db.Preferences.Find(key);
+                    if (kvp != null)
+                    {
+                        kvp.Value = value;
+                    }
+                    else
+                    {
+                        db.Preferences.Add(new PreferenceKeyValuePair(key, value));
+                    }
                     return db.SaveChanges();
                 });
             }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pulsarr.Preferences.DataModel.Library
 {
+    [Table("Library")]
     public class LibraryItem
     {
         public LibraryItem() {}

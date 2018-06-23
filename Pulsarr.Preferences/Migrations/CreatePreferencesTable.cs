@@ -19,7 +19,8 @@ namespace Pulsarr.Preferences.Migrations
             context.Database.ExecuteSqlCommand(@"
                 create table if not exists Preferences (
                     key TEXT PRIMARY KEY,
-                    value TEXT
+                    value TEXT,
+                    Discriminator TEXT
                 );
             ");
         }

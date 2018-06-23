@@ -30,7 +30,8 @@ namespace Pulsarr.Preferences.Migrations
                     imageUrl TEXT,
                     series TEXT,
                     seriesPart NUMERIC,
-                    publicationDate TEXT
+                    publicationDate TEXT,
+                    Discriminator TEXT
                 );
             ");
         }

@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Pulsarr.Preferences.DataModel.Preferences
+namespace Pulsarr.Preferences.DataModel
 {
     public class KeyValuePair
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public string Key { get; set; }
         public string Value { get; set; }
 

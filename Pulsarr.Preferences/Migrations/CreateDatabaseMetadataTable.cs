@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pulsarr.Preferences.DataModel;
+using Pulsarr.Preferences.DataModel.Metadata;
 using Pulsarr.Preferences.DataModel.Migrations;
-using Pulsarr.Preferences.DataModel.Preferences;
 using Pulsarr.Preferences.ServiceInterfaces;
 
 namespace Pulsarr.Preferences.Migrations
@@ -18,13 +18,14 @@ namespace Pulsarr.Preferences.Migrations
         public void Execute(DatabaseStore context)
         {
             context.Database.ExecuteSqlCommand(@"
-                create table if not exists Library (
+                create table if not exists DatabaseMetadata (
                     key TEXT PRIMARY KEY,
-                    value TEXT
+                    value TEXT,
+                    Discriminator TEXT
                 );
             ");
             context.SaveChanges();
-            context.DatabaseMetadata.Add(new KeyValuePair("db.version", "1"));
+            context.DatabaseMetadata.Add(new MetaDataKeyValuePair("db.version", "1"));
         }
     }
 }
