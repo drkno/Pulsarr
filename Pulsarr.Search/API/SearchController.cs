@@ -13,6 +13,7 @@ namespace Pulsarr.Search.API
         [HttpGet]
         public async Task<NewzNabCapabilities> Get()
         {
+            return null;
 //            var client = new HttpClient();
 //            var resp = await client.GetAsync("");
 ////            return await resp.Content.ReadAsAsync<Capabilities>();

@@ -6,7 +6,7 @@ namespace Pulsarr.Search.ServiceInterfaces
 {
     public interface ISearchManager
     {
-        Task<IEnumerable<SearchResult>> SearchByMetaId(string dataSourceId, string bookId);
-        Task<IEnumerable<SearchResult>> SearchByString(string query);
+        Task<List<SearchResult>> SearchByMetaId(string dataSourceId, string bookId);
+        Task<List<SearchResult>> SearchByString(string query);
     }
 }

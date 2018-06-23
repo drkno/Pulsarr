@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml;
 using Pulsarr.Search.Client.Newznab.Model;
+using Pulsarr.Search.Manager.Model;
+using Pulsarr.Search.ServiceInterfaces;
 
 namespace Pulsarr.Search.Client.Newznab
 {
-    public class NewzNabClient
+    public class NewzNabClient : ISearchProvider
     {
         public string ApiKey { get; }
         public Uri ApiUrl { get; }
@@ -58,6 +61,11 @@ namespace Pulsarr.Search.Client.Newznab
                 results.Add(new NewzNabSearchResult(item));
             }
             return results;
+        }
+
+        public async Task<IEnumerable<SearchResult>> Search(string query)
+        {
+            return null;
         }
     }
 }

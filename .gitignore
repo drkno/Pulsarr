@@ -1,4 +1,6 @@
 *devpreferences.properties
+*preferences.db
+*library.db
 
 .vscode/*
 !.vscode/settings.json
