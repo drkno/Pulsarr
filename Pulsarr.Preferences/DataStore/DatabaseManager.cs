@@ -46,11 +46,11 @@ namespace Pulsarr.Preferences.DataStore
             }
         }
 
-        public Task<T> PerformDbTaskAsync<T>(Func<DatabaseStore, Task<T>> dbUser)
+        public async Task<T> PerformDbTaskAsync<T>(Func<DatabaseStore, Task<T>> dbUser)
         {
             using (var db = new DatabaseStore())
             {
-                return dbUser(db);
+                return await dbUser(db);
             }
         }
     }
