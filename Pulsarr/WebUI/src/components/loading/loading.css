@@ -1,0 +1,37 @@
+/* Adapted from https://codepen.io/cely717/pen/yYZOZR */
+
+.loading-dots {
+    text-align: center;
+    z-index: 5;
+}
+
+.loading-dots > .dot {
+    display: inline;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    position: relative;
+    top: -0.75em;
+    font-size: 8em;
+    opacity: 0;
+    animation: showHideDot 2.5s ease-in-out infinite;
+}
+
+.dot:nth-of-type(1) {
+    animation-delay: 0.33s;
+}
+
+.dot:nth-of-type(2) {
+    animation-delay: 0.66s;
+}
+
+.dot:nth-of-type(3) {
+    animation-delay: 0.99s;
+}
+
+@keyframes showHideDot {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    60% { opacity: 1; }
+    100% { opacity: 0; }
+}
+  

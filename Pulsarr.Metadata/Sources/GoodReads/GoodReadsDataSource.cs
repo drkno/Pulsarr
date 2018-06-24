@@ -29,6 +29,10 @@ namespace Pulsarr.Metadata.Sources.GoodReads
         {
             var resultBooks = new List<Book>();
             var books = await _client.Books.Search(search);
+            if (books.Pagination.TotalItems == 0)
+            {
+                return resultBooks.ToImmutableList();
+            }
             foreach (var book in books.List)
             {
                 var junkTitle = book.BestBook?.Title ?? book.OriginalTitle;

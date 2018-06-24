@@ -1,42 +1,81 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Badge } from 'reactstrap';
 import PlusIcon from 'react-open-iconic-svg/dist/Plus';
 import StarIcon from 'react-open-iconic-svg/dist/Star';
-import data from './search.json';
+import Loading from '../../components/loading';
+import Item from '../../components/item';
 
 class LibraryOverview extends React.Component {
-    renderBook(book) {
-        return (
-            <Col sm={3} style={{maxWidth: '250px'}} key={book.id}>
-                <Card>
-                    <CardImg top width="100%" src={book.image} alt={book.title} />
-                    <CardBody>
-                        <CardTitle>{book.title}</CardTitle>
-                        <CardSubtitle style={{display: book.rating && book.rating > 0 ? void (0) : 'none'}}>
-                            <Badge color='warning'>
-                                {book.rating}
-                                &nbsp;
-                                <StarIcon />
-                            </Badge>
-                        </CardSubtitle>
-                        <CardText><i>{book.author}</i></CardText>
-                        <Button color='success'>
-                            <PlusIcon style={{fill: 'white', transform: 'scale(1.3) translateY(-20%)'}} />
-                            &nbsp;
-                            Add
-                        </Button>
-                    </CardBody>
-                </Card>
-            </Col>
-        );
+    state = {
+        books: {
+            items: [],
+            totalItems: 0,
+            rangeStart: null,
+            rangeEnd: null,
+            sortingBy: null,
+            sortOrder: 0
+        },
+        loaded: false
+    };
+
+    async getBooks() {
+        const response = await fetch('/api/library', {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json'
+            }
+        });
+        const json = await response.json();
+        this.setState({
+            books: json,
+            loaded: true
+        });
+    }
+
+    componentDidMount() {
+        this.getBooks();
+    }
+
+    async onDeleteItem(b) {
+        await fetch(`/api/library/${b.id}`, {
+            method: 'DELETE'
+        });
+        const books = this.state.books.items.slice();
+        books.splice(books.indexOf(b), 1);
+        this.setState({
+            books: Object.assign({}, this.state.books, {
+                items: books
+            })
+        });
     }
 
     render() {
-        return (
-            <Row>
-                {data.map(w => this.renderBook(w))}
-            </Row>
-        )
+        if (this.state.loaded) {
+            if (this.state.books.items.length === 0) {
+                return (
+                    <p className='text-center lead'>
+                        Looks like you don't have any audiobooks.
+                        <br />
+                        Would you like to <Link to={'/new'}>add some</Link>?
+                    </p>
+                );
+            }
+            else {
+                return (
+                    <Row>
+                        {this.state.books.items.map(b => 
+                            (<Item
+                                onDeleteItem={() => this.onDeleteItem(b)}
+                                {...b}
+                                key={`book-${b.id}`} />))}
+                    </Row>
+                );
+            }
+        }
+        else {
+            return (<Loading />);
+        }
     }
 }
 

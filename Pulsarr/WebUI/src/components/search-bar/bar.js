@@ -58,6 +58,11 @@ class SearchBar extends React.Component {
         return (
             <div>
                 <InputGroup>
+                    <InputGroupAddon addonType="prepend">
+                        <Button onClick={() => this.onChangeDebounce(this.ref.value)}>
+                            <MagnifingGlassIcon style={{fill: 'white', height: '1em', width: '1em'}} />
+                        </Button>
+                    </InputGroupAddon>
                     <Input
                         list={this.listId}
                         autoComplete='off'
@@ -65,11 +70,6 @@ class SearchBar extends React.Component {
                         placeholder="Search"
                         onChange={e => this.onChangeDebounce(e.target.value)}
                         style={{textAlign: 'center'}} />
-                    <InputGroupAddon addonType="append">
-                        <Button onClick={() => this.onChangeDebounce(this.ref.value)}>
-                            <MagnifingGlassIcon style={{fill: 'white', height: '1em', width: '1em'}} />
-                        </Button>
-                    </InputGroupAddon>
                     <InputGroupAddon addonType="append">
                         <Button color='danger' onClick={this.clear}>
                             <ClearIcon style={{fill: 'white', height: '1em', width: '1em'}} />

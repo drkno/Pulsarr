@@ -20,8 +20,12 @@ namespace Pulsarr.Metadata.Sources
 
         public async Task<ImmutableList<Book>> Search(string title)
         {
-            var dataSources = _provider.GetServices<IDataSource>();
             var resultList = new List<Book>();
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                return resultList.ToImmutableList();
+            }
+            var dataSources = _provider.GetServices<IDataSource>();
             foreach (var dataSource in dataSources.Where(d => d.Enabled))
             {
                 var results = await dataSource.Search(title);
