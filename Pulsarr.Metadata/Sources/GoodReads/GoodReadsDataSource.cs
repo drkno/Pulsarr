@@ -39,7 +39,7 @@ namespace Pulsarr.Metadata.Sources.GoodReads
                 (string title, string series, float? seriesPart) = Utils.ExtractTitleData(junkTitle);
                 var impl = new Book(
                     SourceId,
-                    (book.BestBookId ?? book.Id).ToString(),
+                    (book.BestBook?.Id ?? book.BestBookId ?? book.Id).ToString(),
                     title,
                     "",
                     book.BestBook?.AuthorName,
