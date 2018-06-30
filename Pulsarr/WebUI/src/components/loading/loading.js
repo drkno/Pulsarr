@@ -1,10 +1,10 @@
 import React from 'react';
 import './loading.css';
 
-export default () => (
-    <div class="loading-dots">
-        <h1 class="dot">.</h1>
-        <h1 class="dot">.</h1>
-        <h1 class="dot">.</h1>
+export default ({ className }) => (
+    <div className={`loading-dots ${className || ''}`}>
+        <h1 className='dot'>.</h1>
+        <h1 className='dot'>.</h1>
+        <h1 className='dot'>.</h1>
     </div>
 );

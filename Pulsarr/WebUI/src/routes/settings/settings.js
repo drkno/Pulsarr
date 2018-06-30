@@ -3,6 +3,7 @@ import { TabContainer, Tab } from '../../components/tabs';
 import RawEditor from './raw';
 import IndexerEditor from './indexers';
 import DownloadClientEditor from './downloaders';
+import MetadataEditor from './metadata';
 
 export default ({match}) => {
     let selectedPage = '0';
@@ -19,6 +20,7 @@ export default ({match}) => {
     return (
         <TabContainer selectedTabIndex={selectedPage}>
             <Tab name='Metadata'>
+                <MetadataEditor />
             </Tab>
             <Tab name='Indexers'>
                 <IndexerEditor />

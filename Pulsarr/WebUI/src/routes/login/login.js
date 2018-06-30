@@ -147,7 +147,7 @@ class LoginPage extends React.Component {
 
     renderLoginFailed() {
         return (
-            <div class='login-failure'>
+            <div className='login-failure'>
                 LOGIN FAILURE
             </div>
         );

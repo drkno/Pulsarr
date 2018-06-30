@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Badge } from 'reactstrap';
-import PlusIcon from 'react-open-iconic-svg/dist/Plus';
-import StarIcon from 'react-open-iconic-svg/dist/Star';
+import { Row } from 'reactstrap';
 import Loading from '../../components/loading';
 import Item from '../../components/item';
 

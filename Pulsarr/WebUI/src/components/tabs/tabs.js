@@ -1,6 +1,8 @@
 import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 
+import './tabs.css';
+
 class Tab extends React.Component {
     render() {
         return this.props.children;
@@ -26,7 +28,7 @@ class TabContainer extends React.Component {
     render() {
         return (
             <div>
-                <Nav tabs>
+                <Nav tabs className='tab-bar'>
                     {React.Children.map(this.props.children, (c, i) => (
                         <NavItem key={`tab-nav-${i}`}>
                             <NavLink className={this.state.activeTab === i.toString() ? 'active' : ''} onClick={this.toggle.bind(this, i.toString())}>
