@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+﻿using System;
 
 namespace Pulsarr.Preferences.DataModel.Preferences
 {
-    public class Preference : Annotation
+    public class Preference : Attribute
     {
-        public Preference(string name, object value) : base(name, value)
+        public Preference()
         {
         }
     }

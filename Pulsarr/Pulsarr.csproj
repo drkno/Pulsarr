@@ -35,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Pulsarr.Authorisation\Pulsarr.Authorisation.csproj" />
     <ProjectReference Include="..\Pulsarr.Download\Pulsarr.Download.csproj" />
     <ProjectReference Include="..\Pulsarr.Library\Pulsarr.Library.csproj" />
     <ProjectReference Include="..\Pulsarr.Metadata\Pulsarr.Metadata.csproj" />

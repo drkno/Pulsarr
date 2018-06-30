@@ -69,8 +69,8 @@ namespace Pulsarr.Preferences.DataStore
             var instance = Activator.CreateInstance<T>();
             foreach (var property in properties)
             {
-                var defaultVal = Activator.CreateInstance(property.PropertyType);
-                property.SetValue(instance, Get($"{key}.{property.Name}", defaultVal, true));
+                var value = this[$"{key}.{property.Name}"];
+                property.SetValue(instance, TypeDescriptor.GetConverter(property.PropertyType).ConvertFromString(value));
             }
             return instance;
         }

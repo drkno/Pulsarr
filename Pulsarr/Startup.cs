@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pulsarr.Authorisation;
 using Pulsarr.Download;
 using Pulsarr.Library;
 using Pulsarr.Metadata;
@@ -45,6 +46,7 @@ namespace Pulsarr
             mvc.AddApplicationPart(LibraryServiceRegistry.ConfigureServices(services));
             mvc.AddApplicationPart(PostDownloadServiceRegistry.ConfigureServices(services));
             mvc.AddApplicationPart(SearchServiceRegistry.ConfigureServices(services));
+            mvc.AddApplicationPart(AuthorisationServiceRegistry.ConfigureServices(services));
 
             mvc.AddControllersAsServices();
 
