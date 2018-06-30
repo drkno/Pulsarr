@@ -1,0 +1,13 @@
+.carditem-button {
+    width: 5em;
+}
+
+.carditem-card {
+    flex-grow: 0;
+}
+
+.carditem-card > .card {
+    width: 20em !important;
+    height: 11em !important;
+    margin-bottom: 1em !important;
+}

@@ -81,5 +81,13 @@ namespace Pulsarr.Authorisation
             users.RemoveAt(users.FindIndex(u => username.ToLower().Trim() == u.Username.ToLower().Trim()));
             _preferenceService.SetObjectArray("authorisation.users", users.ToArray());
         }
+
+        public void ChangePassword(string username, string password)
+        {
+            var users = _preferenceService.GetObjectArray<User>("authorisation.users");
+            var user = users.First(u => u.Username.ToLower().Trim() == username.ToLower().Trim());
+            user.PasswordHash = HashPassword(password, user.Salt);
+            _preferenceService.SetObjectArray("authorisation.users", users.ToArray());
+        }
     }
 }

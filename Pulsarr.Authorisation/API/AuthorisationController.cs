@@ -31,5 +31,11 @@ namespace Pulsarr.Authorisation.API
         {
             _authorisationService.DeleteUser(username);
         }
+
+        [HttpPost("{username}")]
+        public void ChangePassword(string username, [FromBody] string password)
+        {
+            _authorisationService.ChangePassword(username, password);
+        }
     }
 }

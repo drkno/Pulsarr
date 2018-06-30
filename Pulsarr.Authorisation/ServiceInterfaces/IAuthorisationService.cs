@@ -5,5 +5,6 @@
         bool CheckAuthentication(string username, string password);
         void CreateUser(string username, string password);
         void DeleteUser(string username);
+        void ChangePassword(string username, string password);
     }
 }
