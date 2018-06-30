@@ -1,7 +1,7 @@
 import React from 'react';
 import Switch from 'rc-switch';
 import { Form, FormGroup, Label, Input, Col, Button } from 'reactstrap';
-import BindPreference from '../bindPreference';
+import BindPreference, { BindSwitchPreference } from '../bindPreference';
 
 import 'rc-switch/assets/index.css';
 
@@ -31,9 +31,9 @@ class MetadataEditor extends React.Component {
                     <FormGroup row>
                         <Label sm={2} for='goodreads-switch'>Enabled</Label>
                         <Col sm={10}>
-                            <BindPreference valueProperty='defaultChecked' preference='goodreads.enabled' defaultValue={true} onSave={addSave} onChangeGet={g => g[0]}>
+                            <BindSwitchPreference preference='goodreads.enabled' defaultValue={true} onSave={addSave}>
                                 <Switch id='goodreads-switch' />
-                            </BindPreference>
+                            </BindSwitchPreference>
                         </Col>
                     </FormGroup>
                     <FormGroup row>

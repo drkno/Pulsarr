@@ -77,4 +77,11 @@ class BindPreference extends React.Component {
     }
 }
 
+const BindSwitchPreference = ({defaultValue, onSave, preference, children}) => (
+    <BindPreference valueProperty='defaultChecked' onChangeGet={g => g[0]} preference={preference} defaultValue={defaultValue} onSave={onSave}>
+        {children}
+    </BindPreference>
+);
+
 export default BindPreference;
+export { BindSwitchPreference };
