@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import RawEditor from './raw';
+import SettingsContainer from './settings';
 
 export default [
-    <Route path="/settings" component={RawEditor}/>
+    <Route path='/settings/:settingsPage' component={SettingsContainer} />,
+    <Route path="/settings" component={SettingsContainer}/>
 ];

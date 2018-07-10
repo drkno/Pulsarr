@@ -1,0 +1,13 @@
+.downloader-button {
+    width: 5em;
+}
+
+.downloader-card {
+    flex-grow: 0;
+}
+
+.downloader-card > .card {
+    width: 20em !important;
+    height: 11em !important;
+    margin-bottom: 1em !important;
+}

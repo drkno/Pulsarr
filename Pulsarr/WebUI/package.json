@@ -9,6 +9,7 @@
     "@fortawesome/react-fontawesome": "^0.0.20",
     "bootstrap": "^4.1.1",
     "lodash.debounce": "^4.0.8",
+    "rc-switch": "^1.6.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-open-iconic-svg": "^2.0.0",

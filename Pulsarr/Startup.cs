@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pulsarr.Authorisation;
 using Pulsarr.Download;
 using Pulsarr.Library;
 using Pulsarr.Metadata;
@@ -29,6 +31,7 @@ namespace Pulsarr
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
             var mvc = services.AddMvc();
             mvc.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSignalR();
@@ -45,6 +48,7 @@ namespace Pulsarr
             mvc.AddApplicationPart(LibraryServiceRegistry.ConfigureServices(services));
             mvc.AddApplicationPart(PostDownloadServiceRegistry.ConfigureServices(services));
             mvc.AddApplicationPart(SearchServiceRegistry.ConfigureServices(services));
+            mvc.AddApplicationPart(AuthorisationServiceRegistry.ConfigureServices(services));
 
             mvc.AddControllersAsServices();
 
@@ -74,6 +78,7 @@ namespace Pulsarr
                 c.RoutePrefix = "api";
             });
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();

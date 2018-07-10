@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Typing from 'react-typing-animation';
+import Console, { Prompt } from '../console';
 import Text from './text';
-import './Marvin.css';
 
-class Marvin extends React.Component {
+class Error extends React.Component {
     interval = null;
 
     componentDidMount() {
@@ -19,15 +19,12 @@ class Marvin extends React.Component {
     render() {
         const lines = Text.split('\n');
         return (
-            <div onWheel={() => clearInterval(this.interval)}>
-                <Typing speed={-1000} cursor={'█'}>
-                    <span className='marvin-user' />
-                    <span className='marvin-at' />
-                    <span className='marvin-hostname' />
-                    <span className='marvin-directory' />
+            <Typing speed={-1000} cursor={'█'}>
+                <Console onWheel={() => clearInterval(this.interval)}>
                     <Typing.Speed ms={100} />
-                    ./marvin&nbsp;<Typing.Delay ms={250} />--error 404
-                    <br />
+                    <Prompt>
+                        ./marvin&nbsp;<Typing.Delay ms={250} />--error 404
+                    </Prompt>
                     <br />
                     <Typing.Speed ms={75} />
                     <Typing.Delay ms={500} />
@@ -40,9 +37,10 @@ class Marvin extends React.Component {
                         </span>
                         ))
                     }
-                </Typing>
-            </div>
+                </Console>
+            </Typing>
         );
     }
 }
-export default Marvin;
+
+export default Error;

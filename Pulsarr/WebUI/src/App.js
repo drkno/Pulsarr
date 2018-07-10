@@ -34,7 +34,7 @@ class App extends Component {
         ];
         return (
             <Router>
-                <SidebarContainer items={icons} logo={<img className='sidebar-logo' src={Logo} />}>
+                <SidebarContainer items={icons} logo={<img className='sidebar-logo' src={Logo} alt='Logo' />}>
                     <Switch>
                         {routes}
                         <Route exact path="/" render={() => (<Redirect to="/library"/>)}/>

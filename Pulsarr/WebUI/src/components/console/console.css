@@ -1,0 +1,30 @@
+.console-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    background-color: black;
+    color: white;
+    font-family: monospace;
+}
+
+.console-area > span > .user:before {
+    color: red;
+    content: 'root';
+}
+
+.console-area > span > .at:before {
+    color: yellow;
+    content: '@';
+}
+
+.console-area > span > .hostname:before {
+    color: cyan;
+    content: 'DeepThought';
+}
+
+.console-area > span > .directory:before {
+    color: yellow;
+    content: ' ~ # ';
+}

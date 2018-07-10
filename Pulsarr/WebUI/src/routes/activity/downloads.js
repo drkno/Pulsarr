@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button, Form, Input, Badge, Progress } from 'reactstrap';
+import { Table, Button, Badge, Progress } from 'reactstrap';
 //import WebSocketComponent from '../../websocket';
 
 class DownloadActivity extends React.Component {
