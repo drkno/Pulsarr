@@ -5,6 +5,6 @@ namespace Pulsarr.Importers
 {
     public interface IImporter
     {
-        Task Import(string type, string id);
+        Task Import(string url);
     }
 }
