@@ -1,12 +1,17 @@
 import React from 'react';
 import { InputGroup, InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardTitle, CardText, CardBody, Row, Col } from 'reactstrap';
 import CardItem from './card';
+import DeleteDialog from './delete';
+import NewRemoteDialog from './new';
 
 import './carditems.css';
 
 class CardArea extends React.Component {
     state = {
-        newMenuOpen: false
+        newMenuOpen: false,
+        deleteItem: null,
+        newItem: null,
+        isEdit: false
     };
 
     toggleNewMenuOpen() {
@@ -15,25 +20,43 @@ class CardArea extends React.Component {
         });
     }
 
-    onNewItemClick() {
-
+    onNewItemClick(n) {
+        this.setState({
+            newItem: n,
+            isEdit: false
+        });
     }
 
     onEnableDisableToggle() {
 
     }
 
-    onDelete() {
-
+    onDelete(i) {
+        this.setState({
+            deleteItem: this.props.items[i]
+        });
     }
 
-    onEdit() {
+    onEdit(n) {
+        this.setState({
+            newItem: n,
+            isEdit: true
+        });
+    }
 
+    onSave(e) {
+        const newItem = this.state.newItem;
+        const isEdit = this.state.isEdit;
+        this.setState({
+            newItem: null
+        });
     }
 
     render() {
         return (
             <Row>
+                <NewRemoteDialog edit={this.state.isEdit} {...(this.state.newItem || {})} onSave={e => this.onSave(e)} />
+                <DeleteDialog item={this.state.deleteItem} />
                 <Col className='carditem-card'>
                     <Card>
                         <CardBody>
@@ -48,7 +71,7 @@ class CardArea extends React.Component {
                                     </DropdownToggle>
                                     <DropdownMenu>
                                         {this.props.newItems.map((n, i) => (
-                                            <DropdownItem onClick={this.onNewItemClick.bind(this, i)} key={i}>{n.name}</DropdownItem>
+                                            <DropdownItem onClick={this.onNewItemClick.bind(this, n)} key={i}>{n.name}</DropdownItem>
                                         ))}
                                     </DropdownMenu>
                                 </InputGroupButtonDropdown>
@@ -64,7 +87,7 @@ class CardArea extends React.Component {
                         enabled={c.enabled}
                         badges={c.badges}
                         onDelete={this.onDelete.bind(this, i)}
-                        onEdit={this.onEdit.bind(this, i)}
+                        onEdit={this.onEdit.bind(this, c)}
                         onEnableDisableToggle={this.onEnableDisableToggle.bind(this, i)} />
                 ))}
             </Row>
