@@ -3,6 +3,7 @@ import Switch from 'rc-switch';
 import { Button, Form, FormGroup, Label, Col } from 'reactstrap';
 import { BindSwitchPreference } from '../bindPreference';
 import CardPreferences from '../../../components/carditems';
+import SettingsLoader from './loading';
 import './downloaders.css';
 
 const clients = [
@@ -43,22 +44,94 @@ const newClients = [
         name: 'Transmission',
         badges: ['Torrent'],
         preferences: [
+            {
+                type: 'bool',
+                name: 'Enabled',
+                key: 'enabled',
+                defaultValue: true
+            },
+            {
+                type: 'text',
+                name: 'Url',
+                key: 'url',
+                defaultValue: 'http://127.0.0.1'
+            },
+            {
+                type: 'number',
+                name: 'Port',
+                key: 'port',
+                defaultValue: '9091'
+            },
+            {
+                type: 'text',
+                name: 'Username',
+                key: 'username',
+                defaultValue: ''
+            },
+            {
+                type: 'password',
+                name: 'Password',
+                key: 'password',
+                defaultValue: ''
+            }
         ]
     },
     {
         name: 'Sabnzbd',
         badges: ['Usenet'],
         preferences: [
+            {
+                type: 'bool',
+                name: 'Enabled',
+                key: 'enabled',
+                defaultValue: true
+            },
+            {
+                type: 'text',
+                name: 'Url',
+                key: 'url',
+                defaultValue: 'http://127.0.0.1'
+            },
+            {
+                type: 'number',
+                name: 'Port',
+                key: 'port',
+                defaultValue: '8080'
+            },
+            {
+                type: 'text',
+                name: 'API Key',
+                key: 'apikey',
+                defaultValue: ''
+            },
+            {
+                type: 'category',
+                name: 'Category',
+                key: 'category',
+                defaultValue: ''
+            }
         ]
     }
 ];
 
 class Downloaders extends React.Component {
     state = {
-        globalOptionsSavable: false
+        globalOptionsSavable: false,
+        clients: []
     };
 
     globalOptionsSave = [];
+
+    onPreferenceValues(values) {
+        values.map(v => {
+            const nc = Object.assign({}, newClients.find(n => n.name === v.name));
+            return ({
+                name: 'Transmission',
+                badges: ['Torrent'],
+                url: 'https://torrent.somewhere.co.nz'
+            });
+        });
+    }
 
     onGlobalOptionsChange(save) {
         this.globalOptionsSave.push(save);
@@ -79,11 +152,15 @@ class Downloaders extends React.Component {
                 <br />
                 <h4>Download Clients</h4>
                 <hr />
-                <CardPreferences
-                    items={clients}
-                    newItems={newClients}
-                    newName='Download Client'
-                    newDescription='Add a new download client such as Transmission or Sabnzbd.' />
+                <SettingsLoader
+                    preferences={['downloadclient.']}
+                    preferenceValues={v => this.onPreferenceValues(v)}>
+                    <CardPreferences
+                        items={this.state.clients}
+                        newItems={newClients}
+                        newName='Download Client'
+                        newDescription='Add a new download client such as Transmission or Sabnzbd.' />
+                </SettingsLoader>
                 <h4>Global Options</h4>
                 <hr />
                 <Form>

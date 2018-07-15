@@ -40,6 +40,12 @@ const newIndexers = [
         badges: [],
         preferences: [
             {
+                type: 'bool',
+                name: 'Enabled',
+                key: 'enabled',
+                defaultValue: true
+            },
+            {
                 type: 'text',
                 name: 'Url',
                 key: 'url',

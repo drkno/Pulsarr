@@ -25,7 +25,7 @@ class NewRemoteDialog extends React.Component {
 
     updateFormValue(item, e, i) {
         const val = this.state.values.slice();
-        val[i] = [item.key, e.target.value];
+        val[i] = [item.key, typeof(e) !== 'object' ? e : e.target.value];
         this.setState({
             value: val
         });
@@ -36,6 +36,17 @@ class NewRemoteDialog extends React.Component {
             <FormGroup key={i}>
                 <Label>{item.name}</Label>
                 <Input type='text'
+                    onChange={e => this.updateFormValue(item, e, i)}
+                    value={this.state.values[i] === void(0) ? item.defaultValue : this.state.values[i][1]} />
+            </FormGroup>
+        );
+    }
+
+    renderPasswordFormItem(item, i) {
+        return (
+            <FormGroup key={i}>
+                <Label>{item.name}</Label>
+                <Input type='password'
                     onChange={e => this.updateFormValue(item, e, i)}
                     value={this.state.values[i] === void(0) ? item.defaultValue : this.state.values[i][1]} />
             </FormGroup>
@@ -57,6 +68,7 @@ class NewRemoteDialog extends React.Component {
         return (
             <FormGroup key={i}>
                 <Label>{item.name}</Label>
+                <br />
                 <Switch
                     onClick={e => this.updateFormValue(item, e, i)}
                     defaultChecked={this.state.values[i] === void(0) ? item.defaultValue : this.state.values[i][1]} />
@@ -70,6 +82,8 @@ class NewRemoteDialog extends React.Component {
                 return this.renderNumberFormItem(item, i);
             case 'bool':
                 return this.renderBoolFormItem(item, i);
+            case 'password':
+                return this.renderPasswordFormItem(item, i);
             case 'text':
             default:
                 return this.renderTextFormItem(item, i);
