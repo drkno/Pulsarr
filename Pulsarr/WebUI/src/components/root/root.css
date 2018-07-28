@@ -1,0 +1,24 @@
+section.content-section {
+    border-bottom: 1px solid #dee2e6;
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+}
+
+@media (min-width: 992px) {
+    section.content-section {
+        padding-left: 20rem !important;
+    }
+}
+
+@media (min-width: 768px) {
+    section.content-section {
+        min-height: 100vh;
+    }
+}
+
+@media (min-width: 992px) {
+    section.content-section {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+    }
+}

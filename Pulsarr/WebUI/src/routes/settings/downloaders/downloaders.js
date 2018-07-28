@@ -3,7 +3,7 @@ import Switch from 'rc-switch';
 import { Button, Form, FormGroup, Label, Col } from 'reactstrap';
 import { BindSwitchPreference } from '../bindPreference';
 import CardPreferences from '../../../components/carditems';
-import SettingsLoader from './loading';
+import SettingsLoader from '../loading';
 import './downloaders.css';
 
 const clients = [

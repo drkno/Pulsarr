@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { faPlusSquare, faBook, faHistory, faCog } from '@fortawesome/fontawesome-free-solid';
-import SidebarContainer from './components/sidebar';
+import Root from './components/root';
 import Error from './components/error';
 import routes from './routes';
 import Logo from './icon.png';
@@ -34,13 +34,13 @@ class App extends Component {
         ];
         return (
             <Router>
-                <SidebarContainer items={icons} logo={<img className='sidebar-logo' src={Logo} alt='Logo' />}>
+                <Root items={icons} logo={Logo}>
                     <Switch>
                         {routes}
                         <Route exact path="/" render={() => (<Redirect to="/library"/>)}/>
                         <Route component={Error} />
                     </Switch>
-                </SidebarContainer>
+                </Root>
             </Router>
         );
     }
