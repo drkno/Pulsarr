@@ -9,6 +9,11 @@
 #sideNav .navbar-nav .nav-item .nav-link {
     font-weight: 600;
     text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+#sideNav .navbar-nav .nav-item .nav-link:hover {
+    color: rgba(255, 255, 255, 1);
 }
 
 @media (min-width: 992px) {

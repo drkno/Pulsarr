@@ -7,6 +7,7 @@
     background-color: black;
     color: white;
     font-family: monospace;
+    z-index: 9999;
 }
 
 .console-area > span > .user:before {
