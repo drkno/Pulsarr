@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Row } from 'reactstrap';
+import { Row, Button, ButtonGroup, Table as BootstrapTable } from 'reactstrap';
 import Loading from '../../components/loading';
-import Item from '../../components/item';
+import Item, { renderState, renderDeleteButton } from '../../components/item';
+import SearchBar from '../../components/search-bar';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faPlusSquare, faTable, faList } from '@fortawesome/fontawesome-free-solid';
+import { Table, Tr, Td } from '../../components/table';
+import './library.css';
 
 class LibraryOverview extends React.Component {
     state = {
@@ -14,8 +19,12 @@ class LibraryOverview extends React.Component {
             sortingBy: null,
             sortOrder: 0
         },
-        loaded: false
+        loaded: false,
+        searchQuery: '',
+        viewMode: 0
     };
+
+    clearSearch = null;
 
     async getBooks() {
         const response = await fetch('/api/library', {
@@ -32,6 +41,12 @@ class LibraryOverview extends React.Component {
     }
 
     componentDidMount() {
+        const viewMode = parseInt(window.localStorage.getItem('libraryViewMode'));
+        if (!isNaN(viewMode)) {
+            this.setState({
+                viewMode: viewMode
+            });
+        }
         this.getBooks();
     }
 
@@ -48,6 +63,62 @@ class LibraryOverview extends React.Component {
         });
     }
 
+    onSearchChange(e) {
+        this.setState({
+            searchQuery: e.toLowerCase()
+        });
+    }
+
+    getFilteredItems() {
+        return this.state.books.items.filter(i => i.title.toLowerCase().indexOf(this.state.searchQuery) >= 0);
+    }
+
+    setViewMode(val) {
+        this.setState({
+            viewMode: val
+        });
+        window.localStorage.setItem('libraryViewMode', val);
+    }
+
+    renderGridView() {
+        return (
+            <Row>
+                {this.getFilteredItems().map(b => 
+                    (<Item
+                        onDeleteItem={() => this.onDeleteItem(b)}
+                        {...b}
+                        key={`book-${b.id}`} />))}
+            </Row>
+        );
+    }
+
+    renderTableView() {
+        return (
+            <BootstrapTable responsive>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>State</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.getFilteredItems().map(b => (
+                        <tr key={b.id}>
+                            <td>{b.title}</td>
+                            <td>{b.author}</td>
+                            <td>{renderState(b.state)}</td>
+                            <td>
+                                {renderDeleteButton(() => this.onDeleteItem(b), true)}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </BootstrapTable>
+        );
+    }
+
     render() {
         if (this.state.loaded) {
             if (this.state.books.items.length === 0) {
@@ -61,13 +132,36 @@ class LibraryOverview extends React.Component {
             }
             else {
                 return (
-                    <Row>
-                        {this.state.books.items.map(b => 
-                            (<Item
-                                onDeleteItem={() => this.onDeleteItem(b)}
-                                {...b}
-                                key={`book-${b.id}`} />))}
-                    </Row>
+                    <div>
+                        <Table>
+                            <Tr>
+                                <Td className='library-button'>
+                                    <Button color='success' onClick={() => this.props.history.push('/new')}>
+                                        <FontAwesomeIcon icon={faPlusSquare} />
+                                        &nbsp;New
+                                    </Button>
+                                </Td>
+                                <Td className='library-button'>
+                                    <ButtonGroup>
+                                        <Button active={this.state.viewMode === 0} onClick={() => this.setViewMode(0)}>
+                                            <FontAwesomeIcon icon={faTable} />
+                                        </Button>
+                                        <Button active={this.state.viewMode === 1} onClick={() => this.setViewMode(1)}>
+                                            <FontAwesomeIcon icon={faList} />
+                                        </Button>
+                                    </ButtonGroup>
+                                </Td>
+                                <Td>
+                                    <SearchBar
+                                        suggestions={this.state.books.items.map(i => i.title)}
+                                        onChange={e => this.onSearchChange(e)}
+                                        clear={c => this.clearSearch = c} />
+                                </Td>
+                            </Tr>
+                        </Table>
+                        <hr />
+                        {this.state.viewMode === 0 ? this.renderGridView() : this.renderTableView()}
+                    </div>
                 );
             }
         }

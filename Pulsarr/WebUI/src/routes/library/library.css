@@ -1,0 +1,8 @@
+.library-button {
+    width: 0.01px;
+    padding-right: 0.25em;
+}
+
+.library-button > button, .library-button > div > button {
+    margin-bottom: 0.3em;
+}

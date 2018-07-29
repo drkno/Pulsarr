@@ -1,1 +1,1 @@
-export { default } from './item.js';
+export { default, renderState, renderDeleteButton } from './item.js';

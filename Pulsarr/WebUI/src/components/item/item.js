@@ -16,8 +16,8 @@ const renderAddItemButton = onAddItem => onAddItem && (
     </Button>
 );
 
-const renderDeleteButton = onDeleteItem => onDeleteItem && (
-    <Button color='danger' onClick={onDeleteItem}>
+const renderDeleteButton = (onDeleteItem, small) => onDeleteItem && (
+    <Button color='danger' onClick={onDeleteItem} size={small ? 'sm' : void(0)}>
         <TrashIcon className='item-button-icon' />
         &nbsp;
         Delete
@@ -71,10 +71,11 @@ const Item = ({imageUrl, title, author, state, onAddItem, onDeleteItem}) => (
                 </CardSubtitle>
                 <CardText><i>{author}</i></CardText>
                 {renderAddItemButton(onAddItem)}
-                {renderDeleteButton(onDeleteItem)}
+                {renderDeleteButton(onDeleteItem, false)}
             </CardBody>
         </Card>
     </Col>
 );
 
 export default Item;
+export { renderState, renderDeleteButton };
