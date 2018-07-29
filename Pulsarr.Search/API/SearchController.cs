@@ -1,8 +1,8 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Pulsarr.Search.Client.Newznab;
-using Pulsarr.Search.Client.Newznab.Model;
+using Pulsarr.Search.Manager.Model;
+using Pulsarr.Search.ServiceInterfaces;
 
 namespace Pulsarr.Search.API
 {
@@ -10,14 +10,23 @@ namespace Pulsarr.Search.API
     [ApiController]
     public class SearchController : ControllerBase
     {
-        [HttpGet]
-        public async Task<NewzNabCapabilities> Get()
+        private readonly ISearchManager _searchManager;
+
+        public SearchController(ISearchManager searchManager)
         {
-            return null;
-//            var client = new HttpClient();
-//            var resp = await client.GetAsync("");
-////            return await resp.Content.ReadAsAsync<Capabilities>();
-//            return await resp.Content.ReadAsStringAsync();
+            _searchManager = searchManager;
+        }
+
+        [HttpPost]
+        public Task<List<SearchResult>> SearchByString([FromBody] string query)
+        {
+            return _searchManager.SearchByString(query);
+        }
+
+        [HttpPost("{metadatId}/{bookId}")]
+        public Task<List<SearchResult>> SearchByMetaId(string metadatId, string bookId)
+        {
+            return _searchManager.SearchByMetaId(metadatId, bookId);
         }
     }
 }

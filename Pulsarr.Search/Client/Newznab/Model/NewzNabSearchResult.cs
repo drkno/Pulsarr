@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Xml;
+using Pulsarr.Search.Manager.Model;
 
 namespace Pulsarr.Search.Client.Newznab.Model
 {
-    public class NewzNabSearchResult
+    public class NewzNabSearchResult : SearchResult
     {
         private readonly IDictionary<string, string> _attributes;
 
         public string Title { get; }
+        public string Id => Guid;
         public string Guid { get; }
         public string Link { get; }
         public string CommentLink { get; }

@@ -195,7 +195,8 @@ class RawEditor extends React.Component {
                     </Form>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color='danger' onClick={onSave} disabled={(editItem.key || '').length === 0}>Save</Button>
+                    <Button color='danger' onClick={onSave}
+                        disabled={(editItem.key || '').length === 0 || (editItem.key || '')[(editItem.key || '').length - 1] === '.'}>Save</Button>
                     <Button color='secondary' onClick={onClose}>Cancel</Button>
                 </ModalFooter>
             </Modal>

@@ -1,10 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Pulsarr.Search.Manager.Model
 {
-    public class SearchResult
+    public interface SearchResult
     {
+        string Title { get; }
+        string Id { get; }
+        string Link { get; }
+        DateTime PublishDate { get; }
+        string Category { get; }
+        string Description { get; }
     }
 }

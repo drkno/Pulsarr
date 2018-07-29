@@ -12,36 +12,30 @@ namespace Pulsarr.Search.Client.Newznab
 {
     public class NewzNabClient : ISearchProvider
     {
-        public string ApiKey { get; }
-        public Uri ApiUrl { get; }
+        private string ApiKey { get; }
+        private Uri ApiUrl { get; }
+        private List<int> Categories { get; set; }
 
-        public NewzNabClient(string url, string apiKey, string apiPath = "/api")
+        public NewzNabClient(IndexerPreferences add)
         {
-            ApiKey = apiKey;
+            Categories = new List<int>();
+            ApiKey = add.ApiKey;
 
-            var builder = new UriBuilder(url)
+            var builder = new UriBuilder(add.Host)
             {
-                Scheme = url.StartsWith("https")
+                Scheme = add.UseTls
                     ? Uri.UriSchemeHttps
                     : Uri.UriSchemeHttp
             };
-            if (!builder.Path.EndsWith(apiPath))
+            if (!builder.Path.EndsWith(add.Resource))
             {
-                builder.Path = builder.Path.TrimEnd('/') + '/' + apiPath.TrimStart('/');
+                builder.Path = builder.Path.TrimEnd('/') + '/' + add.Resource.TrimStart('/');
             }
             builder.Query = "";
             ApiUrl = builder.Uri;
         }
-
-        public NewzNabCapabilities GetCapabilities()
-        {
-            var queryUri = new UriBuilder(ApiUrl) {Query = $"t=caps&o=xml&apikey={ApiKey}"};
-            var xmlResponse = new XmlDocument();
-            xmlResponse.Load(queryUri.Uri.ToString());
-            return new NewzNabCapabilities(xmlResponse);
-        }
         
-        public List<NewzNabSearchResult> Search(NewzNabQuery query)
+        private async Task<List<NewzNabSearchResult>> Search(NewzNabQuery query)
         {
             var results = new List<NewzNabSearchResult>();
             var queryUri = new UriBuilder(ApiUrl);
@@ -63,9 +57,35 @@ namespace Pulsarr.Search.Client.Newznab
             return results;
         }
 
+        public async Task<bool> Test()
+        {
+            try
+            {
+                var queryUri = new UriBuilder(ApiUrl) {Query = $"t=caps&o=xml&apikey={ApiKey}"};
+                var xmlResponse = new XmlDocument();
+                xmlResponse.Load(queryUri.Uri.ToString());
+                var response = new NewzNabCapabilities(xmlResponse);
+                Categories = response.Categories.Select(c => c.Key).Where(c => c >= 3000 && c < 4000 && c != 3020).ToList();
+                return Categories.Count > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public async Task<IEnumerable<SearchResult>> Search(string query)
         {
-            return null;
+            if (Categories.Count == 0)
+            {
+                await Test();
+            }
+            var nnq = new NewzNabQuery(query, Categories);
+            return await Search(nnq);
+        }
+
+        public void Dispose()
+        {
         }
     }
 }
