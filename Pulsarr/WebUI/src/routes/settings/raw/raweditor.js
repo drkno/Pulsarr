@@ -1,12 +1,14 @@
 import React from 'react';
-import { Table, Button, Form, Input } from 'reactstrap';
+import { Table, Button, Form, FormGroup, Input, Label, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import 'whatwg-fetch';
 import './raw.css';
 
 class RawEditor extends React.Component {
     state = {
         preferences: {},
-        searchTerm: null
+        searchTerm: null,
+        editItem: null,
+        deleteItem: null
     };
 
     async componentDidMount() {
@@ -17,47 +19,56 @@ class RawEditor extends React.Component {
         })
     }
 
-    editValue(preference) {
-        const newValue = prompt(preference, this.state.preferences[preference] || '');
-        if (newValue !== null) {
-            this.setState({
-                preferences: Object.assign({}, this.state.preferences, {[preference]: newValue})
-            });
-            fetch('/api/preferences', {
-                method: 'POST',
-                body: JSON.stringify({[preference]: newValue}),
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            });
-        }
+    deleteValue(preference) {
+        this.setState({
+            deleteItem: preference
+        });
     }
 
-    deleteValue(preference) {
-        const sure = window.confirm(`Are you sure you want to delete "${preference}"?`);
-        if (sure) {
-            const newPreferences = Object.assign({}, this.state.preferences);
-            delete newPreferences[preference];
-            this.setState({
-                preferences: newPreferences
-            });
-            fetch('/api/preferences', {
-                method: 'DELETE',
-                body: JSON.stringify([preference]),
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            });
+    editValue(preference) {
+        const val = this.state.preferences[preference];
+        let type;
+        if (val === 'True' || val === 'False') {
+            type = 'b';
         }
+        else if (!isNaN(val)) {
+            type = 'n';
+        } else {
+            type = 's';
+        }
+        this.setState({
+            editItem: {
+                editable: false,
+                key: preference,
+                value: val,
+                type: type
+            }
+        });
     }
 
     newValue() {
-        const newKey = prompt('What is the name for your preference?', '');
-        if (newKey !== null && newKey.trim() !== '') {
-            this.editValue(newKey);
-        }
+        this.setState({
+            editItem: {
+                editable: true,
+                key: '',
+                value: '',
+                type: 's'
+            }
+        });
+    }
+
+    saveNewEditedValue() {
+        this.setState({
+            preferences: Object.assign({}, this.state.preferences, {[this.state.editItem.key]: this.state.editItem.value})
+        });
+        fetch('/api/preferences', {
+            method: 'POST',
+            body: JSON.stringify({[this.state.editItem.key]: this.state.editItem.value}),
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
     }
 
     filter(search) {
@@ -80,9 +91,122 @@ class RawEditor extends React.Component {
         });
     }
 
+    renderDeleteModal() {
+        const preference = this.state.deleteItem;
+        const onClose = () => this.setState({
+            deleteItem: null
+        });
+        const onDelete = () => {
+            onClose();
+            const newPreferences = Object.assign({}, this.state.preferences);
+            delete newPreferences[preference];
+            this.setState({
+                preferences: newPreferences
+            });
+            fetch('/api/preferences', {
+                method: 'DELETE',
+                body: JSON.stringify([preference]),
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+        };
+        return (
+            <Modal isOpen={this.state.deleteItem !== null}>
+                <ModalHeader>Delete Key/Value</ModalHeader>
+                <ModalBody>
+                    Are you sure you want to delete <code>{preference || ''}</code>?
+                </ModalBody>
+                <ModalFooter>
+                    <Button color='danger' onClick={onDelete}>Delete</Button>
+                    <Button color='secondary' onClick={onClose}>Cancel</Button>
+                </ModalFooter>
+            </Modal>
+        );
+    }
+
+    renderEditModal() {
+        const editItem = this.state.editItem || {};
+        const onChange = value => {
+            this.setState({
+                editItem: Object.assign({}, this.state.editItem, {
+                    value: value
+                })
+            });
+        };
+        const onClose = () => this.setState({
+            editItem: null
+        });
+        const onSave = () => {
+            onClose();
+            this.saveNewEditedValue();
+        };
+        let valueEditor;
+        switch(editItem.type) {
+            case 'b':
+                valueEditor = (
+                    <Input type='select' value={editItem.value} onChange={e => onChange(e.target.value)}>
+                        <option value='True'>True</option>
+                        <option value='False'>False</option>
+                    </Input>
+                );
+                break;
+            case 'n':
+                valueEditor = (
+                    <Input type='number' value={editItem.value} onChange={e => onChange(e.target.value)} />
+                );
+                break;
+            default:
+                valueEditor = (
+                    <Input type='text' value={editItem.value} onChange={e => onChange(e.target.value)} />
+                );
+                break;
+        }
+        const onKeyChange = e => this.setState({
+            editItem: Object.assign({}, this.state.editItem, {key: e.target.value})
+        });
+        const onTypeChange = e => this.setState({
+            editItem: Object.assign({}, this.state.editItem, {type: e.target.value, value: ''})
+        });
+        return (
+            <Modal isOpen={this.state.editItem !== null}>
+                <ModalHeader>
+                    {editItem.editable ? 'New' : 'Edit'} Key/Value
+                </ModalHeader>
+                <ModalBody>
+                    <Form>
+                        <FormGroup>
+                            <Label>Key Name</Label>
+                            <Input type='text' value={editItem.key} disabled={!editItem.editable} onChange={onKeyChange} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Key Type</Label>
+                            <Input type='select' value={editItem.type} onChange={onTypeChange}>
+                                <option value='s'>String</option>
+                                <option value='b'>Boolean</option>
+                                <option value='n'>Number</option>
+                            </Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Value</Label>
+                            {valueEditor}
+                        </FormGroup>
+                    </Form>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color='danger' onClick={onSave} disabled={(editItem.key || '').length === 0}>Save</Button>
+                    <Button color='secondary' onClick={onClose}>Cancel</Button>
+                </ModalFooter>
+            </Modal>
+        );
+    }
+
     render() {
         return (
             <div>
+                {this.renderDeleteModal()}
+                {this.renderEditModal()}
                 <Input type='text' placeholder='Search' onChange={e => this.updateFilter(e)} />
                 <Table striped size="sm" hover responsive className='raw-config-editor'>
                     <thead>
