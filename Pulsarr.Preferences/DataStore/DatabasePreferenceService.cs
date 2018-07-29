@@ -36,7 +36,14 @@ namespace Pulsarr.Preferences.DataStore
                     var kvp = db.Preferences.Find(key);
                     if (kvp != null)
                     {
-                        kvp.Value = value;
+                        if (value == null)
+                        {
+                            db.Preferences.Remove(kvp);
+                        }
+                        else
+                        {
+                            kvp.Value = value;
+                        }
                     }
                     else
                     {
