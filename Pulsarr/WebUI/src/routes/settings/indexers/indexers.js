@@ -1,39 +1,6 @@
 import React from 'react';
 import CardPreferences from '../../../components/carditems';
 
-const indexers = [
-    {
-        id: 0,
-        name: 'Newznab',
-        badges: [],
-        url: 'https://thepiratebay.org'
-    },
-    {
-        id: 1,
-        name: 'Newznab',
-        badges: [],
-        url: 'https://isohunt.org'
-    },
-    {
-        id: 2,
-        name: 'Newznab',
-        badges: [],
-        url: 'https://nzb.cat'
-    },
-    {
-        id: 3,
-        name: 'Newznab',
-        badges: [],
-        url: 'https://foo.bar'
-    },
-    {
-        id: 4,
-        name: 'Newznab',
-        badges: [],
-        url: 'https://bar.foo'
-    }
-];
-
 const newIndexers = [
     {
         name: 'Newznab',

@@ -6,39 +6,6 @@ import CardPreferences from '../../../components/carditems';
 import SettingsLoader from '../loading';
 import './downloaders.css';
 
-const clients = [
-    {
-        id: 0,
-        name: 'Transmission',
-        badges: ['Torrent'],
-        url: 'https://torrent.somewhere.co.nz'
-    },
-    {
-        id: 1,
-        name: 'Sabnzbd',
-        badges: ['Usenet'],
-        url: 'https://nzb.somewhere.co.nz'
-    },
-    {
-        id: 2,
-        name: 'Sabnzbd',
-        badges: ['Usenet'],
-        url: 'https://nzb.somewhere.co.nz'
-    },
-    {
-        id: 3,
-        name: 'Sabnzbd',
-        badges: ['Usenet'],
-        url: 'https://nzb.somewhere.co.nz'
-    },
-    {
-        id: 4,
-        name: 'Sabnzbd',
-        badges: ['Usenet'],
-        url: 'https://nzb.somewhere.co.nz'
-    }
-];
-
 const newClients = [
     {
         name: 'Transmission',
